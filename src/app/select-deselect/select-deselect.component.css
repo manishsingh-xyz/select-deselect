@@ -1,0 +1,32 @@
+select {
+  width: 100%;
+}
+.subject-info-box-1, .subject-info-box-2 {
+  width: 100%;
+}
+.subject-info-box-1 select, .subject-info-box-2 select {
+  height: 200px;
+  padding: 0;
+}
+.subject-info-box-1 select option, .subject-info-box-2 select option {
+  padding: 4px 10px 4px 10px;
+}
+.subject-info-box-1 select option:hover, .subject-info-box-2 select option:hover {
+  background: #eee;
+}
+.subject-info-arrows {
+    width: 100%;
+    text-align: center;
+    padding-top: 131px;
+}
+.subject-info-arrows input {
+  padding: 8px 15px;
+  margin-bottom: 5px;
+  min-width: 100px;
+  width: 30%;
+  cursor: pointer;
+}
+.wrapper{
+    display: flex;
+    justify-content: center;
+}
