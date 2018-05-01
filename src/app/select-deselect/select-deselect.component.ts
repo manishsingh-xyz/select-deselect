@@ -46,6 +46,7 @@ export class SelectDeselectComponent implements OnInit {
         }
       }
       this.avaliableSelectedView = null;
+      this.addDisabled = true;
     }
 
     removeData(): void {
@@ -56,6 +57,7 @@ export class SelectDeselectComponent implements OnInit {
         }
       }
       this.currentSelectedView = null;
+      this.removeDisabled = true;
     }
 
     onAvaliableListChange(d, i): void {
