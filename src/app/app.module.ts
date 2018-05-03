@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { SelectDeselectComponent } from './select-deselect/select-deselect.component';
 
-import { TestserviceService } from './testservice.service';
+import { ListdataService } from './listdata.service';
 
 
 @NgModule({
@@ -18,7 +18,7 @@ import { TestserviceService } from './testservice.service';
     BrowserModule,
     FormsModule
   ],
-  providers: [TestserviceService],
+  providers: [ListdataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

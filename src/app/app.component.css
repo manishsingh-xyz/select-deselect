@@ -1,0 +1,9 @@
+button {
+    padding: 8px 15px;
+    margin-bottom: 5px;
+    min-width: 100px;
+    width: 20%;
+    float: right;
+    margin-top: 20px;
+    align-items: center
+  }

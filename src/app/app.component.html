@@ -1,1 +1,5 @@
-<app-select-deselect></app-select-deselect>
+<app-select-deselect [dataList]="listdata"  (updateList)="updateData($event)"></app-select-deselect>
+<button type="button" class="btn btn-default" (click)="getListData()">Save</button>
+
+<app-select-deselect [dataList]="listdata2" (updateList)="updateData2($event)"></app-select-deselect>
+<button type="button" class="btn btn-default" (click)="getList2Data()">Save</button>
