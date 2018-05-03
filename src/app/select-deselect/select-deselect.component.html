@@ -5,8 +5,8 @@
 <div class="wrapper">
   <div class="subject-info-box-1">
     <h4>Available Views</h4>
-    <select size="10" id='lstBox1' class="form-control" [(ngModel)]="avaliableSelectedView">
-      <option *ngFor='let data of availablelist; let i = index;' [value]="data.value" (click)="onAvaliableListChange(data, i)">
+    <select size="10" id='lstBox1' class="form-control">
+      <option *ngFor='let data of availableDataList; let i = index;' [value]="data.value" (click)="onAvaliableListChange(data, i)">
         {{data.value}}
       </option>
     </select>
@@ -20,8 +20,8 @@
 
   <div class="subject-info-box-2">
     <h4>Current Views</h4>
-    <select size="10" id='lstBox1' class="form-control" [(ngModel)]="currentSelectedView">
-      <option *ngFor='let data of currentlist;let i = index;' [value]="data.value" (click)="onCurrentListChange(data, i)">
+    <select size="10" id='lstBox1' class="form-control" >
+      <option *ngFor='let data of currentDataList;let i = index;' [value]="data.value" (click)="onCurrentListChange(data, i)">
         <span *ngIf="data.required">*</span><span *ngIf="!data.required">&nbsp;</span> {{data.value}}
       </option>
     </select>

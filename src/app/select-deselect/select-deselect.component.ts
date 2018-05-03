@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { TestserviceService } from '../testservice.service';
-import { Test } from '../test';
-import { AVALIABLE, CURRENT } from '../testdata';
+import { Component, OnInit, Input, Output, EventEmitter, Injectable } from '@angular/core';
+import { List, listdata } from '../list';
+
+@Injectable()
 
 @Component({
   selector: 'app-select-deselect',
@@ -11,72 +11,77 @@ import { AVALIABLE, CURRENT } from '../testdata';
 
 export class SelectDeselectComponent implements OnInit {
 
-    availablelist: Test[];
-    currentlist: Test[];
-    avaliableSelectedView: string;
-    currentSelectedView: string;
-    addedValue: any;
-    indexValue: number;
-    addDisabled: boolean = true;
-    removeDisabled: boolean = true;
+    @Input()  private dataList: List[];
+    @Output() private updateList: EventEmitter<List[]> = new EventEmitter<List[]>();
+    private currentDataList: listdata[];
+    private availableDataList: listdata[];
+    private addedValue: any;
+    private indexValue: number;
+    private addDisabled = true;
+    private removeDisabled = true;
+    
+    constructor() { }
 
-    constructor(private testService: TestserviceService) { }
-
-    ngOnInit() {
-      this.getData();
+    ngOnInit() {       
+          if (this.dataList[0].Available !== undefined || this.dataList[0].Available !== null) {
+              this.availableDataList = this.dataList[0].Available;
+          }
+          else {
+            this.availableDataList = [];
+          }
+          if (this.dataList[0].Current !== undefined || this.dataList[0].Current !== null) {
+            this.currentDataList = this.dataList[0].Current;
+          }
+          else {
+            this.currentDataList = [];
+          }
     }
 
-    getData(): void {
-      this.testService.getAvailableViewData()
-        .subscribe(productdata => {
-          this.availablelist = productdata[0].results;
-        });
-
-      this.testService.getCurrentViewData()
-        .subscribe(productdata => {
-          this.currentlist = productdata[0].results;
-        });
-    }
-
-    addData(): void {
-      if (this.avaliableSelectedView) {
-        this.currentlist.push(this.addedValue);
+    private addData(): void {
+      if (this.addedValue) {
+        this.dataList[0].Current.push(this.addedValue);
         if (this.indexValue > -1) {
-          this.availablelist.splice(this.indexValue, 1);
+          this.dataList[0].Available.splice(this.indexValue, 1);
         }
       }
-      this.avaliableSelectedView = null;
       this.addDisabled = true;
+      this.updateList.emit(this.dataList);
     }
 
-    removeData(): void {
-      if (this.currentSelectedView && this.addedValue.required !== true) {
-        this.availablelist.push(this.addedValue);
+    private removeData(): void {
+      if (this.addedValue && this.addedValue.required !== true) {
+        this.dataList[0].Available.push(this.addedValue);
         if (this.indexValue > -1) {
-          this.currentlist.splice(this.indexValue, 1);
+          this.dataList[0].Current.splice(this.indexValue, 1);
         }
       }
-      this.currentSelectedView = null;
       this.removeDisabled = true;
+      this.updateList.emit(this.dataList);
     }
 
-    onAvaliableListChange(d, i): void {
-      this.currentSelectedView = null;
+    private onAvaliableListChange(data, index): void {
       this.addDisabled = false;
       this.removeDisabled = true;
-      this.addedValue = d;
-      this.indexValue = i
+      this.addedValue = data;
+      this.indexValue = index;
     }
-
-    onCurrentListChange(d, i): void {
-      this.avaliableSelectedView = null;
+    
+    private onCurrentListChange(data, index): void {
       this.removeDisabled = true;
       this.addDisabled = true;
-      if(d.required !== true){
-        this.addDisabled = true;
-        this.removeDisabled = false;
+      if (data.required !== true) {
+          this.addDisabled = true;
+          this.removeDisabled = false;
       }
-      this.addedValue = d;
-      this.indexValue = i;
+      this.addedValue = data;
+      this.indexValue = index;
+    }
+
+    public getListData() {
+      return this.dataList;
+    }
+
+    public getList2Data() {
+      return this.dataList;
     }
 }
